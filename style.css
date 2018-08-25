@@ -1,3 +1,8 @@
+/*Touch up font weight of card title
+padding of placeholder*/
+
+/*input font size*/
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -55,17 +60,27 @@ form {
   font-weight: 800;
   font-size: 1.2rem;
   color: white;
+  border: none;
+}
+
+.enter-btn:hover:enabled {
+  background-color: #FFD773;
+}
+
+.enter-btn:disabled {
+  background-color: grey;
 }
 
 
 .card-section {
   background-color: #CFD8DC;
+  overflow-y: scroll;
 }
 
 
 article {
   background-color: white;
-  border: 1px solid #607D8B;
+  border: 2px solid #607D8B;
   margin: 1.25rem 1.25rem 1.5rem 1.25rem;
   padding: .7rem 1rem;
 
@@ -87,7 +102,12 @@ article {
   text-decoration: underline;
   text-decoration-color: #F2F4F4;
   padding-bottom: 1rem;
+}
 
+.card-url:hover {
+  color: #455A64;
+  text-decoration-color: #FFC107;
+  font-weight: 800;
 }
 
 .button-wrapper {
@@ -96,14 +116,87 @@ article {
 }
 
 
+.card-buttons {
+  border: none;
+  padding: 0;
+  background: none;
+  color: #455A64;
+  text-decoration: underline;
+  text-decoration-color: #F2F4F4;
+  font-size: 1rem;
+}
+
 .read-btn {
 
+}
+
+.read-btn:hover {
+  color: #455A64;
+  text-decoration-color: #FFC107;
+  font-weight: 800;
+}
+
+.read-clicked {
+  color: #F05A28;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 800;
+}
+
+.article-clicked {
+  background-color: #F2F4F4;
+}
+
+.url-clicked {
+  text-decoration-color: #CFD8DC;
 }
 
 .delete-btn {
 
 }
 
+.delete-btn:hover {
+  color: #455A64;
+  text-decoration-color: #FFC107;
+  font-weight: 800;
+}
 
+@media screen and (max-width: 1150px) {
+  body { 
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+  }
+
+  .title-logo { 
+    width: 60%;
+    font-size: 2.3rem;
+    text-align: center;
+    margin: 1.5rem 0rem;
+  }
+
+  img {
+    width: 3.2rem;
+  }
+
+  form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .user-input {
+    width: 90%;
+    margin-bottom: 1.5rem;
+    height: 3.5rem;
+  }
+
+  .enter-btn {
+    margin-bottom: 2rem;
+    width: 90.2%;
+    height: 3rem;
+  }
+}
 
 
