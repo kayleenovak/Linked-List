@@ -2,7 +2,10 @@ var titleInput = document.querySelector('.title-input');
 var urlInput = document.querySelector('.url-input');
 var enterButton = document.querySelector('.enter-btn');
 var cardSection = document.querySelector('.card-section');
-counter = 0;
+var totalBookmarks = 0;
+var readCounter = 0;
+var unreadLinks = 0;
+var backToRead = 0;
 
 enterButton.addEventListener('click', createCard);
 cardSection.addEventListener('click', markAsRead);
@@ -21,9 +24,14 @@ function createCard(event) {
                        <button class="delete-btn card-buttons">Delete</button>
                        </div>`;
   cardSection.prepend(newCard);
-  counter ++;
-  console.log(counter);
+  totalBookmarks ++;
   clearInputs();
+  checkInputs();
+  unreadLinks = totalBookmarks - readCounter;
+  console.log("# of unread bookmarks " + unreadLinks);
+  console.log("# of read bookmarks " + readCounter)
+  console.log("# of total bookmarks " + totalBookmarks);
+  console.log("# of total backToRead " + backToRead);
 }
 
 function clearInputs() {
@@ -33,22 +41,35 @@ function clearInputs() {
 
 // Add class change to card-url
 function markAsRead(event) {
-  console.log(event);
   if (event.target.classList.contains('read-btn')) {
-    console.log('Yes');
-    event.target.classList.remove('card-buttons');
     event.target.classList.add('read-clicked');
     event.target.parentNode.parentNode.classList.add('article-clicked');
-    // event.target.
+    event.target.classList.remove('read-btn');
+    readCounter ++;
+    // console.log(readCounter);
+  } else if (event.target.classList.contains('read-clicked')) {
+    event.target.classList.remove('read-clicked');
+    event.target.parentNode.parentNode.classList.remove('article-clicked');
+    event.target.classList.add('read-btn');
+    readCounter --;
   }
+  unreadLinks = totalBookmarks - readCounter;
+  console.log("# of unread bookmarks " + unreadLinks);
+  console.log("# of read bookmarks " + readCounter)
+  console.log("# of total bookmarks " + totalBookmarks);
+  console.log("# of total backToRead " + backToRead);
 }
 
 function deleteCard(event) {
   if (event.target.classList.contains('delete-btn')) {
     event.target.parentNode.parentNode.remove();
+    totalBookmarks --;
   }
-  counter --;
-  console.log(counter);
+  unreadLinks = totalBookmarks - readCounter;
+  console.log("# of unread bookmarks " + unreadLinks);
+  console.log("# of read bookmarks " + readCounter)
+  console.log("# of total bookmarks " + totalBookmarks);
+  console.log("# of total backToRead " + backToRead);
 }
 
 function checkInputs() {
@@ -57,5 +78,17 @@ function checkInputs() {
   } else {
     enterButton.disabled = false;
   }
-  
 }
+
+
+//Unread totalBookmarks - Number of enters minus number of deletes minus number of reads
+
+//Clear Read Bookmarks
+  // - create a new <p>Clear Read Bookmarks</p>
+  // - add a class to the p createElement
+  // - create a variable for that p element. 
+  // - add an addEventListener on click with the function deleteReadBookmarks
+  // - create a function deleteReadBookmarks
+  // - that function should target the p element and change the class of all 
+  //   read bookmarks - maybe need to loop through and use the totalBookmarks as the i < this number
+  //   this number being the number of times the enter button has been pressed.

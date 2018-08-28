@@ -163,6 +163,18 @@ article {
   font-weight: 800;
 }
 
+.clear-read-div {
+  position: relative;
+  left: 39.5%;
+  top: 27.5%;
+}
+
+.clear-read-links {
+    background-color: #FFC107;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+}
+
 @media screen and (max-width: 1150px) {
   body { 
     display: grid;
@@ -197,6 +209,12 @@ article {
     width: 90.2%;
     height: 3rem;
   }
+
+  .clear-read-div {
+  position: relative;
+  left: 30%;
+  top: 21%;
+}
 }
 
 
