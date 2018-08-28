@@ -2,20 +2,50 @@ var titleInput = document.querySelector('.title-input');
 var urlInput = document.querySelector('.url-input');
 var enterButton = document.querySelector('.enter-btn');
 var cardSection = document.querySelector('.card-section');
+var clearReadBtn = document.querySelector('.clear-read-links');
+var totalBookmarksCounter = document.querySelector('.total-bookmarks');
+var readBookmarksCounter = document.querySelector('.read-bookmarks');
+var unreadBookmarksCounter = document.querySelector('.unread-bookmarks');
 var totalBookmarks = 0;
-var readCounter = 0;
-var unreadLinks = 0;
-var backToRead = 0;
+var readBookmarks = 0;
+var unreadBookmarks = 0;
 
-enterButton.addEventListener('click', createCard);
+enterButton.addEventListener('click', submitCard);
 cardSection.addEventListener('click', markAsRead);
 cardSection.addEventListener('click', deleteCard);
 titleInput.addEventListener('keyup', checkInputs);
 urlInput.addEventListener('keyup', checkInputs);
+clearReadBtn.addEventListener('click', clearAllRead);
 
+checkNumBookmarks();
+checkUnreadBookmarks();
+checkReadBookmarks();
+
+function urlValidation(str) {
+var expression = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+var regex = new RegExp(expression);
+var url = str;
+
+if (url.match(regex)) {
+  return true
+} else {
+  alert('Input fields are invalid URL')
+  return false;
+}
+}
+
+function submitCard(event) {
+  event.preventDefault();
+  var urlInputVal = urlInput.value;
+  console.log(urlInputVal);
+  if (urlValidation(urlInputVal)) {
+    createCard();
+  } else {
+    alert('Please Enter Valid URL');
+  }
+}
 
 function createCard(event) {
-  event.preventDefault();
   var newCard = document.createElement('article');
   newCard.innerHTML = `<h1 class="card-title">${titleInput.value}</h1>
                        <p class="card-url">${urlInput.value}</p>
@@ -24,14 +54,11 @@ function createCard(event) {
                        <button class="delete-btn card-buttons">Delete</button>
                        </div>`;
   cardSection.prepend(newCard);
-  totalBookmarks ++;
   clearInputs();
   checkInputs();
-  unreadLinks = totalBookmarks - readCounter;
-  console.log("# of unread bookmarks " + unreadLinks);
-  console.log("# of read bookmarks " + readCounter)
-  console.log("# of total bookmarks " + totalBookmarks);
-  console.log("# of total backToRead " + backToRead);
+  checkNumBookmarks();
+  checkUnreadBookmarks();
+  checkReadBookmarks();
 }
 
 function clearInputs() {
@@ -45,31 +72,22 @@ function markAsRead(event) {
     event.target.classList.add('read-clicked');
     event.target.parentNode.parentNode.classList.add('article-clicked');
     event.target.classList.remove('read-btn');
-    readCounter ++;
-    // console.log(readCounter);
   } else if (event.target.classList.contains('read-clicked')) {
     event.target.classList.remove('read-clicked');
     event.target.parentNode.parentNode.classList.remove('article-clicked');
     event.target.classList.add('read-btn');
-    readCounter --;
-  }
-  unreadLinks = totalBookmarks - readCounter;
-  console.log("# of unread bookmarks " + unreadLinks);
-  console.log("# of read bookmarks " + readCounter)
-  console.log("# of total bookmarks " + totalBookmarks);
-  console.log("# of total backToRead " + backToRead);
+    }
+  checkReadBookmarks();
+  checkUnreadBookmarks();
 }
 
 function deleteCard(event) {
   if (event.target.classList.contains('delete-btn')) {
     event.target.parentNode.parentNode.remove();
-    totalBookmarks --;
   }
-  unreadLinks = totalBookmarks - readCounter;
-  console.log("# of unread bookmarks " + unreadLinks);
-  console.log("# of read bookmarks " + readCounter)
-  console.log("# of total bookmarks " + totalBookmarks);
-  console.log("# of total backToRead " + backToRead);
+  checkNumBookmarks();
+  checkReadBookmarks();
+  checkUnreadBookmarks();
 }
 
 function checkInputs() {
@@ -80,15 +98,34 @@ function checkInputs() {
   }
 }
 
+function checkNumBookmarks() {
+  var totalNumBookmarks = document.querySelectorAll('.button-wrapper');
+    totalBookmarks = totalNumBookmarks.length;
+    totalBookmarksCounter.innerText = 'Total Bookmarks: ' + totalBookmarks;
+}
 
-//Unread totalBookmarks - Number of enters minus number of deletes minus number of reads
+function checkReadBookmarks() {
+  var totalReadBookmarks = document.querySelectorAll('.read-clicked');
+    readBookmarks = totalReadBookmarks.length;
+    readBookmarksCounter.innerText = 'Read Bookmarks: ' + readBookmarks;
+}
 
-//Clear Read Bookmarks
-  // - create a new <p>Clear Read Bookmarks</p>
-  // - add a class to the p createElement
-  // - create a variable for that p element. 
-  // - add an addEventListener on click with the function deleteReadBookmarks
-  // - create a function deleteReadBookmarks
-  // - that function should target the p element and change the class of all 
-  //   read bookmarks - maybe need to loop through and use the totalBookmarks as the i < this number
-  //   this number being the number of times the enter button has been pressed.
+function checkUnreadBookmarks() {
+  var totalUnreadBookmarks = document.querySelectorAll('.read-btn');
+    unreadBookmarks = totalUnreadBookmarks.length;
+    unreadBookmarksCounter.innerText = 'Unread Bookmarks: ' + unreadBookmarks;
+
+}
+
+function clearAllRead() {
+  var totalReadBookmarks = document.querySelectorAll('.read-clicked');
+  for (i = 0; i < totalReadBookmarks.length; i++) {
+    totalReadBookmarks[i].parentNode.parentNode.remove();
+  }
+  checkNumBookmarks();
+  checkReadBookmarks();
+  checkUnreadBookmarks(); 
+  console.log('Read bookmarks ' + readBookmarks);
+  console.log('unread ' + unreadBookmarks);
+  console.log('total bookmarks ' + totalBookmarks);
+}

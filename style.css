@@ -42,7 +42,8 @@ form {
   width: 34.2rem;
   height: 3rem;
   margin-bottom: 3rem;
-  padding-top: .9rem;
+  padding: 0 0 .2rem .5rem;
+  font-size: 2.5rem;
 }
 
 .user-input::placeholder {
@@ -163,16 +164,19 @@ article {
   font-weight: 800;
 }
 
-.clear-read-div {
-  position: relative;
-  left: 39.5%;
-  top: 27.5%;
+.counter-wrapper {
+  width: 80%;
+  margin: 2.7rem;
+  display: flex;
+  justify-content: space-between;
+  color: white;
 }
 
 .clear-read-links {
     background-color: #FFC107;
     font-family: 'Open Sans', sans-serif;
     border: none;
+    border-radius: 20px;
 }
 
 @media screen and (max-width: 1150px) {
@@ -182,7 +186,6 @@ article {
   }
 
   .title-logo { 
-    width: 60%;
     font-size: 2.3rem;
     text-align: center;
     margin: 1.5rem 0rem;
@@ -202,6 +205,8 @@ article {
     width: 90%;
     margin-bottom: 1.5rem;
     height: 3.5rem;
+    font-size: 2.5rem;
+    padding: 0 0 .2rem .5rem;
   }
 
   .enter-btn {
@@ -217,4 +222,10 @@ article {
 }
 }
 
+@media screen and (max-width: 600px) {
 
+.counter-wrapper {
+  flex-direction: column;
+  align-items: center;
+}
+}
