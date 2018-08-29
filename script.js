@@ -48,7 +48,7 @@ function submitCard(event) {
 function createCard(event) {
   var newCard = document.createElement('article');
   newCard.innerHTML = `<h1 class="card-title">${titleInput.value}</h1>
-                       <p class="card-url">${urlInput.value}</p>
+                       <p class="card-url"><a href='https://${urlInput.value}'>${urlInput.value}</a></p>
                        <div class="button-wrapper">
                        <button class="read-btn card-buttons">Read</button>
                        <button class="delete-btn card-buttons">Delete</button>
@@ -59,6 +59,7 @@ function createCard(event) {
   checkNumBookmarks();
   checkUnreadBookmarks();
   checkReadBookmarks();
+  titleInput.focus();
 }
 
 function clearInputs() {
