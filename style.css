@@ -18,7 +18,7 @@ body {
   justify-content: center;
 }
 
-.title-logo {
+.linked-list-title {
   color: white;
   font-size: 4.7rem;
   margin-bottom: 3rem;
@@ -45,7 +45,6 @@ form {
   color: lightgray;
   font-family: 'Open Sans', sans-serif;
   font-size: 2rem;
-
 }
 
 .enter-btn {
@@ -61,6 +60,7 @@ form {
 
 .enter-btn:hover:enabled {
   background-color: #FFD773;
+  cursor: pointer;
 }
 
 .enter-btn:disabled {
@@ -181,7 +181,6 @@ a {
   text-decoration-color: #FFC107;
 }
 
-
 @media screen and (max-width: 1150px) {
   
   body { 
@@ -189,7 +188,7 @@ a {
     grid-template-columns: repeat(1, 1fr); 
   }
 
-  .title-logo { 
+  .linked-list-title { 
     font-size: 3rem;
     margin: 1.5rem 0rem;
     text-align: center;
@@ -226,7 +225,7 @@ a {
 
 @media screen and (max-width: 600px) {
 
-  .title-logo {
+  .linked-list-title {
     font-size: 1.5rem;
   }
 
