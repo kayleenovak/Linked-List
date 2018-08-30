@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE>
+<html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,24 +8,24 @@
 </head>
 <body>
   <section class="input-section">
-    <h1 class="title-logo">Linked <img src="images/linked-list-logo.svg"> List</h1>
+    <header>
+      <h1 class="linked-list-title">Linked <img src="images/linked-list-logo.svg"> List</h1>
+    </header>
     <form>
-      <input type="text" name="website-title" class="title-input user-input" placeholder="Website Title">
-      <input type="url" name="url-input" class="url-input user-input" placeholder="Website URL">
-      <button class="enter-btn" disabled>Enter</button>
+      <input type="text" aria-label="Enter title of website" name="website-title" class="title-input user-input" placeholder="Website Title">
+      <input type="url" aria-label="enter website URL here" name="url-input" class="url-input user-input" placeholder="Website URL">
+      <button aria-label="enter button" class="enter-btn" disabled>Enter</button>
     </form>
     <div class="counter-wrapper">
       <p class="total-bookmarks"></p>
       <p class="read-bookmarks"></p>
       <p class="unread-bookmarks"></p>
     </div>
-      <button class="clear-read-links">Clear Read Bookmarks</button>
+    <button aria-label="clear all read bookmarks" class="clear-read-links">Clear Read Bookmarks</button>
   </section>
 
-  <section class="card-section">
-       
+  <section class="card-section">  
   </section>
-
 
 <script type="text/javascript" src="script.js"></script>
 </body>
