@@ -17,14 +17,11 @@ cardSection.addEventListener('click', markAsRead);
 cardSection.addEventListener('click', deleteCard);
 clearReadBtn.addEventListener('click', clearAllRead);
 
-checkTotalBookmarks();
-checkUnreadBookmarks();
-checkReadBookmarks();
+checkAllBookmarks();
 
 function submitCard(event) {
   event.preventDefault();
   var urlInputVal = urlInput.value;
-  console.log(urlInputVal);
   if (urlValidation(urlInputVal)) {
     createCard();
   } else {
@@ -55,9 +52,7 @@ function createCard(event) {
   cardSection.prepend(newCard);
   clearInputs();
   toggleEnterBtn();
-  checkTotalBookmarks();
-  checkUnreadBookmarks();
-  checkReadBookmarks();
+  checkAllBookmarks();
   titleInput.focus();
 }
 
@@ -68,25 +63,30 @@ function clearInputs() {
 
 function markAsRead(event) {
   if (event.target.classList.contains('read-btn')) {
-    event.target.classList.add('read-clicked');
-    event.target.parentNode.parentNode.classList.add('article-clicked');
-    event.target.classList.remove('read-btn');
+    addArticleClicked(event);
   } else if (event.target.classList.contains('read-clicked')) {
-    event.target.classList.remove('read-clicked');
-    event.target.parentNode.parentNode.classList.remove('article-clicked');
-    event.target.classList.add('read-btn');
-    }
-  checkReadBookmarks();
-  checkUnreadBookmarks();
+    removeArticleClicked(event);
+  }
+  checkAllBookmarks();
+}
+
+function addArticleClicked(event) {
+  event.target.classList.add('read-clicked');
+  event.target.parentNode.parentNode.classList.add('article-clicked');
+  event.target.classList.remove('read-btn');
+}
+
+function removeArticleClicked(event) {
+  event.target.classList.remove('read-clicked');
+  event.target.parentNode.parentNode.classList.remove('article-clicked');
+  event.target.classList.add('read-btn');
 }
 
 function deleteCard(event) {
   if (event.target.classList.contains('delete-btn')) {
     event.target.parentNode.parentNode.remove();
   }
-  checkTotalBookmarks();
-  checkReadBookmarks();
-  checkUnreadBookmarks();
+  checkAllBookmarks();
 }
 
 function toggleEnterBtn() {
@@ -95,6 +95,12 @@ function toggleEnterBtn() {
   } else {
     enterButton.disabled = false;
   }
+}
+
+function checkAllBookmarks() {
+  checkTotalBookmarks();
+  checkReadBookmarks();
+  checkUnreadBookmarks();
 }
 
 function checkTotalBookmarks() {
@@ -120,10 +126,5 @@ function clearAllRead() {
   for (i = 0; i < totalReadBookmarks.length; i++) {
     totalReadBookmarks[i].parentNode.parentNode.remove();
   }
-  checkTotalBookmarks();
-  checkReadBookmarks();
-  checkUnreadBookmarks(); 
-  console.log('Read bookmarks ' + readBookmarks);
-  console.log('unread ' + unreadBookmarks);
-  console.log('total bookmarks ' + totalBookmarks);
+  checkAllBookmarks(); 
 }
